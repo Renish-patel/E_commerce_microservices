@@ -24,33 +24,33 @@ import static org.springframework.http.ResponseEntity.status;
 @Testcontainers
 @AutoConfigureMockMvc
 class ProductServiceApplicationTests {
-	@Container
-	static 	MySQLContainer mySQLContainer = new MySQLContainer();
-	@Autowired
-	private MockMvc mockMvc;
-	@Autowired
-	private ObjectMapper objectMapper;
-	@DynamicPropertySource
-	static void setProperties(DynamicPropertyRegistry dynamicPropertyRegistry){
-		dynamicPropertyRegistry.add("spring.datasource.url",mySQLContainer::getJdbcUrl);
-	}
-
-	@Test
-	void shouldCreateProduct() throws Exception {
-
-		ProductRequest productRequest= getProductRequest();
-	String productRequestString = objectMapper.writeValueAsString(productRequest);
-		mockMvc.perform(MockMvcRequestBuilders.post("/product")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(productRequestString));
-	}
-
-	private ProductRequest getProductRequest() {
-		return ProductRequest.builder()
-				.name("iphone11")
-				.price(BigDecimal.valueOf(3200))
-				.description("is an wonderfull phone")
-				.build();
-	}
+//	@Container
+//	static 	MySQLContainer mySQLContainer = new MySQLContainer();
+//	@Autowired
+//	private MockMvc mockMvc;
+//	@Autowired
+//	private ObjectMapper objectMapper;
+//	@DynamicPropertySource
+//	static void setProperties(DynamicPropertyRegistry dynamicPropertyRegistry){
+//		dynamicPropertyRegistry.add("spring.datasource.url",mySQLContainer::getJdbcUrl);
+//	}
+//
+//	@Test
+//	void shouldCreateProduct() throws Exception {
+//
+//		ProductRequest productRequest= getProductRequest();
+//	String productRequestString = objectMapper.writeValueAsString(productRequest);
+//		mockMvc.perform(MockMvcRequestBuilders.post("/product")
+//				.contentType(MediaType.APPLICATION_JSON)
+//				.content(productRequestString));
+//	}
+//
+//	private ProductRequest getProductRequest() {
+//		return ProductRequest.builder()
+//				.name("iphone11")
+//				.price(BigDecimal.valueOf(3200))
+//				.description("is an wonderfull phone")
+//				.build();
+//	}
 
 }

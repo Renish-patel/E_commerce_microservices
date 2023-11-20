@@ -23,7 +23,7 @@ public class OrderService {
 	private final OrderRepository orderRepository;
 	private final WebClient.Builder	 webClientBuilder;
 
-	public void placeOrder(OrderRequest orderRequest) {
+	public String placeOrder(OrderRequest orderRequest) {
 		Order order = new Order();
 		order.setOrderNumber(UUID.randomUUID().toString());
 		List<OrderLineItems> orderLineItems = orderRequest.getOrderLineItemsDtoList().stream().map(this::mapToDto)
@@ -44,6 +44,7 @@ public class OrderService {
 			boolean allProdutsInStock = Arrays.stream(inventoryResponseArray).allMatch(InventoryResponse::getIsInStock);
 		if(allProdutsInStock) {
 			orderRepository.save(order);
+			return "order placed successfully";
 		}
 		else {
 			throw new IllegalArgumentException("product is not in the inventory"); 
